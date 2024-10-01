@@ -14,9 +14,19 @@
         top: 90%;
         left: 50%; 
         transform: translateX(-50%); 
-        transition: top 0.1s ease; 
+        transition: top 0.1s ease;
+        z-index: 2; 
     }
     
+    .stop-line {
+        position: absolute;
+        top: 20em;
+        left: 50%;
+        width: 10em;
+        height: 1em;
+        background-color: white;
+        transform: translateX(-50%);
+    }
 
     #road {
         margin-top: 1vh;
@@ -44,14 +54,6 @@
         background-color: white;
         width: 0.5em;
         height: 2em;
-    }
-
-    #stop-line {
-        background-color: white;
-        align-self: end;
-        width: 10em;
-        height: 1em;
-        border: 1px black solid;
     }
 
     #traffic-lights-wrapper {
@@ -169,7 +171,18 @@
         top: 90%;
         left: 50%; 
         transform: translateX(-50%); 
-        transition: top 0.1s ease; 
+        transition: top 0.1s ease;
+        z-index: 2; 
+    }
+    
+    .stop-line {
+        position: absolute;
+        top: 20em;
+        left: 50%;
+        width: 10em;
+        height: 1em;
+        background-color: white;
+        transform: translateX(-50%);
     }
 
     #road {
@@ -198,16 +211,6 @@
         background-color: white;
         width: 0.5em;
         height: 3em;
-    }
-
-    #stop-line {
-        background-color: white;
-        align-self: end;
-        margin-top: 5vh;
-        margin-bottom: 1vh;
-        width: 10em;
-        height: 1em;
-        border: 1px black solid;
     }
 
     #traffic-lights-wrapper {
