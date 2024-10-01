@@ -1,11 +1,12 @@
-let state = 2; // Initial state is 2, meaning the red light is active
-let speed = 0; // Current speed of the car
-const maxSpeed = 20; // Maximum speed of the car
-const acceleration = 2; // Speed increment when the light is green
-const car = document.getElementById('car'); // Get the car element
+let state = 2;
+let speed = 0; 
+const maxSpeed = 20;
+const acceleration = 2;
+const car = document.getElementById('car');
+const stopLine = document.querySelector('.stop-line');
+let carStopped = false;
 
 function changeLight() {
-    // Reset all lights to inactive
     document.querySelector('.red').classList.remove('active');
     document.querySelector('.yellow').classList.remove('active');
     document.querySelector('.green').classList.remove('active');
@@ -14,10 +15,8 @@ function changeLight() {
     document.querySelector('.yellow').classList.add('inactive');
     document.querySelector('.green').classList.add('inactive');
 
-    // Increment state and wrap around using modulo
     state = (state + 1) % 4;
 
-    // Set the traffic lights based on the state
     if (state === 0) {
         document.querySelector('.green').classList.add('active');
         document.querySelector('.green').classList.remove('inactive');
@@ -40,27 +39,38 @@ function controlCar() {
     const yellowLightActive = document.querySelector('.yellow').classList.contains('active');
     const redLightActive = document.querySelector('.red').classList.contains('active');
 
-    if (greenLightActive) {
+    let currentTop = parseFloat(getComputedStyle(car).top) || 400;
+    const stopLineTop = parseFloat(getComputedStyle(stopLine).top);
+    const distanceToStopLine = currentTop - stopLineTop;
+
+    if (distanceToStopLine > 0) {
+        if (greenLightActive) {
+            speed = Math.min(speed + acceleration, maxSpeed);
+        } else if (yellowLightActive) {
+            speed = Math.max(distanceToStopLine / 10, 0);
+        } else if (redLightActive) {
+            speed = Math.max(distanceToStopLine / 20, 0);
+        }
+    } else {
+        carStopped = true;
         speed = Math.min(speed + acceleration, maxSpeed);
-    } else if (yellowLightActive) {
-        speed = Math.max(speed - acceleration, 0);
-    } else if (redLightActive) {
-        speed = 0;
     }
 
-    let currentTop = parseFloat(getComputedStyle(car).top) || 100;
-    car.style.top = `${currentTop - speed / 5}px`;
+    if (currentTop - speed <= 0) {
+        car.style.top = '90vh';
+        speed = 0;
+    } else {
+        car.style.top = `${currentTop - speed}px`;
+    }
 }
 
+
 document.addEventListener('DOMContentLoaded', () => {
-    // Manually activate the red light without calling changeLight()
     document.querySelector('.red').classList.add('active');
     document.querySelector('.red').classList.remove('inactive');
-    // Ensure no other lights are active at the start
     document.querySelector('.yellow').classList.remove('active');
     document.querySelector('.green').classList.remove('active');
     document.querySelector('.green').classList.add('inactive');
 });
 
-// Start changing lights and controlling the car
 setInterval(controlCar, 100);
