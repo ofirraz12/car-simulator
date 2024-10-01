@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traffic Lights</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div id="road">
+        <div class="road-background">
+            <div class="road-lines">
+                <div class="road-line"></div><div class="road-line" ></div><div class="road-line"></div><div class="road-line"  id="stop-line"></div>
+                <div class="road-line"></div><div class="road-line"></div><div class="road-line"></div><div class="road-line"></div>
+                <div class="road-line"></div>
+            </div>
+        </div>
+    </div>
+    <div class="car" id="car">
+        <img src="car.png" alt="car" height="70vh">
+    </div>
+    <div id="traffic-lights-wrapper">
+        <div class="traffic-lights">
+            <div class="light-container">
+                <div class="light green active"></div>
+                <div class="light yellow inactive"></div>
+                <div class="light red inactive"></div>
+            </div>
+        </div>
+        <div class="traffic-lights-pole"></div>
+    </div>
+
+    <div id="button-box">
+        <div class="my-button-style">
+            <button class="my-button" onclick="changeLight()"></button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
